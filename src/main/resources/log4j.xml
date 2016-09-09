@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!-- -->
+<!-- Log4j Configuration -->
+<!-- -->
+<!-- ===================================================================== -->
+
+<!-- $Id: _log4j.xml,v 1.3 2009/03/11 16:31:26 sbo Exp $ -->
+
+<!-- | For more configuration infromation and examples see the Jakarta Log4j 
+	| owebsite: http://jakarta.apache.org/log4j -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="ERROR" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d{dd-MM HH:mm:ss,SSS} (%F:%M:%L)  -%m%n" />
+		</layout>
+	</appender>
+
+	<appender name="ROTFILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="Threshold" value="ALL" />
+		<param name="File" value="${catalina.base}/logs/due04.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="ImmediateFlush" value="true" />
+
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] Messagen -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p (%F:%M) %m%n" />
+			<!-- <param name="ConversionPattern" value="%-5p %d{dd-MM HH:mm:ss,SSS} 
+				(%F:%M:%L) -%m%n"/> -->
+		</layout>
+	</appender>
+
+	<root>
+		<priority value="ERROR" />
+		<appender-ref ref="console" />
+	</root>
+
+	<logger name="org.docx4j">
+		<level value="OFF" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="org.docx4j.org.xhtmlrenderer.load">
+		<level value="OFF" />
+		<appender-ref ref="console" />
+	</logger>
+    
+    <logger name="org.springframework.context">
+        <level value="TRACE" />
+        <appender-ref ref="console" />
+    </logger>
+
+	<logger name="org.flywaydb.core">
+		<level value="INFO" />
+		<appender-ref ref="ROTFILE" />
+	</logger>
+	
+	<logger name="com.mchange.v2">
+		<level value="WARN" />
+		<appender-ref ref="ROTFILE" />
+	</logger>
+
+	<logger name="com.khresterion.kengine.calk.runtime">
+		<level value="ERROR" />
+		<appender-ref ref="ROTFILE" />
+	</logger>
+
+	<logger name="com.khresterion.due">
+		<level value="TRACE" />
+		<appender-ref ref="ROTFILE" />
+	</logger>
+
+</log4j:configuration>

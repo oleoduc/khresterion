@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content='initial-scale=1.0, maximum-scale=1.0, width=device-width' name='viewport'/>
+
+    <!-- build:css({.tmp,app}) static/css/due.min.css -->
+    <link rel="stylesheet" href="css/due.css" media="screen"/>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+</head>
+<body>
+<div class="rootpane">
+    <div class="loginscreen">
+        <div class="row">
+            <div class="columns small-6 kbdlogo"><h4>&nbsp;</h4></div>
+            <div class="column small-6">
+                <form name="loginForm" method="POST" action="login">
+                    <div class="row">
+                        <div class="column small-4"><label for="username">Utilisateur <span
+                                class="warning">*</span></label></div>
+                        <div class="column small-8"><input type="text" id="username" name="username" tabindex="1"
+                                                           autofocus required/></div>
+                    </div>
+                    <div class="row">
+                        <div class="column small-4"><label for="password">Mot de passe <span
+                                class="warning">*</span></label></div>
+                        <div class="column small-8"><input type="password" id="password" name="password" tabindex="2"
+                                                           required/></div>
+                    </div>
+                    <div class="row">
+                        <div class="column small-8 small-offset-4">
+                            <button type="submit" class="button actionbutton" value="connecter" tabindex="3">Connecter
+                            </button>
+                            <input type="hidden"
+                                   name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column small-4 small-centered">DUE v0.5</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column small-6 small-centered">
+            #if($errormsg)
+            <div class="alert-box warning">${errormsg}</div>
+            #end
+            #if($successmsg)
+            <div class="alert-box success">${successmsg}</div>
+            #end
+        </div>
+    </div>
+</div>
+
+<!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+<!--[if lt IE 9]>
+<script src="js/polyfill/rem.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+</body>
+</html>

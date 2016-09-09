@@ -1,0 +1,10 @@
+<div class="coherencepanel">
+    <div class="label-container" tooltip-trigger tooltip-placement="bottom" tooltip-popup-delay="500"
+         tooltip-html-unsafe="{{property.tooltip}}">
+        <label class="" ng-class="{'kb-advised': property.isAdvised,'kb-excluded-violated': property.isIncoherent,
+    'kb-label-uncomplete': property.isUncomplete,'kb-disadvised': property.isDisadvised}">{{property.label}}</label>
+    </div>
+    <div class="field-container">
+        <input type="checkbox" ng-model="property.isIncluded"/>&nbsp;<input type="checkbox" ng-model="property.isExcluded"/>
+    </div>
+</div>

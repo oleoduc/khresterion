@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- <application version="1.0" -->
+	<!-- theme="/META-INF/kpeuro/ui/kpeuro.theme" -->
+	<!-- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" -->
+	<!--
+		xsi:noNamespaceSchemaLocation="http://www.normind.com/diagnosis/diagnosis.xsd">
+	-->
+
+<application version="1.0">
+
+<services>
+    <serviceConfiguration id="I18nManager">
+        <i18nManager>
+            <bundle name="META-INF.due.bundles.i18n"></bundle>
+            <bundle name="META-INF.kbuilder.bundles.i18n"></bundle>
+            <bundle name="META-INF.due.report.bundles.i18n"></bundle>
+        </i18nManager>
+    </serviceConfiguration>
+</services>
+
+	<kengineDataConfiguration>
+		<domains>
+			<domain resource="/META-INF/due/DUEv0.4.2b.kmf"/>
+		</domains>
+		<referent typeId="Ontologie1_Document" domainName="TestContrat" />
+		<kbuilder typeId="Ontologie1_Section0"
+			propertyPath="Ontologie1_Document/Ontologie1_estComposeDe/Ontologie1_Section0" />
+	</kengineDataConfiguration>
+	
+	   <reports>
+        <type id="Ontologie1_Document">
+            <freeMarkerReport name="Etude" type="application/rtf">
+                <templates main="documentdue.ftl">
+                    <resource path="/META-INF/due/report/templates/" />
+                </templates>
+                <dataModel>
+                    <element key="dates" staticWrapper="com.khresterion.util.Dates" />
+                    <element key="i18nManager" serviceId="I18nManager" />
+                    <element key="Strings" staticWrapper="com.khresterion.util.Strings" />
+                    <element key="PropertyWrapper" staticWrapper="com.khresterion.web.report.export.PropertyWrapper" />
+                    <element key="BoUtilities" staticWrapper="com.khresterion.kengine.bo.BoUtilities" />
+                    <element key="Encodings" staticWrapper="com.khresterion.util.Encodings" />
+                </dataModel>
+            </freeMarkerReport>
+        </type>
+    </reports>
+    
+</application>

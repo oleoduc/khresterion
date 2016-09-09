@@ -1,0 +1,16 @@
+<div class="coherencepanel">
+    <div class="label-container" tooltip-trigger tooltip-placement="bottom" tooltip-popup-delay="500"
+         tooltip-html-unsafe="{{simple.property.tooltip}}">
+        <label class="" ng-class="{'kb-advised': simple.property.isAdvised,'kb-excluded-violated': simple.property.isIncoherent,
+    'kb-label-uncomplete': simple.property.isUncomplete,'kb-disadvised': simple.property.isDisadvised}">{{simple.property.label}}</label>
+    </div>
+
+    <div class="field-container" tooltip-trigger tooltip-placement="bottom" tooltip-popup-delay="500"
+         tooltip-html-unsafe="{{simple.property.tooltip}}">
+        <input class="{{simple.textclass}}" maxlength="{{simple.maxlength}}" ng-class="{'kb-advised': simple.property.isClassAdvised,'kb-excluded-violated': simple.property.isClassIncoherent,
+        'kb-uncomplete': simple.property.isClassUncomplete,'kb-disadvised': simple.property.isClassDisadvised}"
+               type="text" ng-model="simple.property.value" ng-keyup="simple.updateProperty($event)"
+               ng-blur="simple.updateProperty($event)"/>
+    </div>
+
+</div>

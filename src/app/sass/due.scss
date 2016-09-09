@@ -1,0 +1,202 @@
+@import "base/base";
+@import "base/coherence";
+@import "base/inputfixes";
+@import "base/progressbar";
+@import "foundation/functions";
+@import "foundation/components/global";
+@import "foundation/components/forms";
+@import "foundation/components/grid";
+@import "foundation/components/type";
+@import "foundation/components/tabs";
+@import "foundation/components/tooltips";
+@import "foundation/components/reveal";
+@import "foundation/components/progress-bars";
+@import "foundation/components/tables";
+@import "foundation/components/inline-lists";
+@import "foundation/components/accordion";
+@import "compass/css3/flexbox";
+@import "compass/css3/inline-block";
+
+
+div#top {
+  width: 64rem;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: 0px auto 100px auto;
+}
+
+.top-bar {
+  background: $kblighter;
+  overflow: hidden;
+  margin: 0px auto 0px auto;
+}
+
+.container {
+  @include display-flex;
+  @include flex-direction(row);
+  height: 100%;
+  margin: 0px auto 0px;
+}
+
+
+.sidenav {
+  flex:auto;
+  order:1;
+  margin-right: 5px;
+}
+
+.maincontent {
+  flex:auto;
+  order:2;
+}
+
+.aggregate {
+  margin: 4px 0px;
+  padding: 0px 0px;
+  border: 1px solid $kbdborder;
+}
+
+.aggregate-header {
+  background-color: $kblighter;
+  color: $kbdark;
+  border: 1px solid $kbdborder;
+  //font-size: $base-font-size;
+  padding: 8px 4px;
+}
+
+.aggregate-body {
+  a {
+    font-size: $base-font-size;
+  }
+  background-color: transparent;
+  padding: 4px 4px;
+
+}
+
+.aggregate-footer {
+  background-color: $kblighter;
+  color: $kbdark;
+  font-size: $base-font-size;
+  padding: 4px 4px;
+  min-height: 1.5rem;
+}
+
+.legendbar span {
+  font-size: rem-calc(10);
+}
+
+.mainredac {
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  background: $kblighter;
+}
+
+.prevredac {
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  background: $evalbackground;
+}
+
+.homelink-group {
+  display: inline-block;
+  align: center;
+  .homelink {
+    /*float: left;
+    width: 150px;
+    height: 150px;*/
+    border: 1px solid $kblight;
+    text-align: center;
+    padding: 60px 4px;
+  }
+  .homelink:hover {
+    background-color: $kblighter;
+  }
+}
+
+.variable-container {
+  width: 100%;
+  height: 780px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  table {
+    width: 100%;
+    table-layout: fixed;
+    .var-key {
+      width: 70%;
+      word-wrap: break-word;
+    }
+    .var-action {
+      width: 30%;
+    }
+  }
+}
+
+.dbview {
+  flex: auto;
+  order: 2;
+}
+
+.dbview table{
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+  .shrinkcolumn {
+    width: 70%;
+    overflow-x: auto;
+  }
+  .idcolumn {
+    width: 5%;
+  }
+  .scrollkcolumn {
+    width: 15%;
+    overflow-x: auto;
+  }
+  .fieldcolumn {
+    width: 80%;
+  }
+}
+
+.iconremove {
+  @include inline-block;
+  margin-right: 8px;
+  width: 16px;
+  padding: 0px 2px 0px 2px;
+  @include background(image-url("delete16x16.png") no-repeat);
+  a {
+    display: block;
+    line-height: 16px;
+  }
+}
+
+.iconact {
+  @include inline-block;
+  width: 2rem;
+  width: 16px;
+  margin-right: 8px;
+  padding: 0px 2px 0px 2px;
+  @include background(image-url("play16.png") no-repeat);
+  a {
+    display: block;
+    line-height: 16px;
+  }
+}
+
+.iconplay {
+  @include inline-block;
+  margin-right: 8px;
+  width: 16px;
+  padding: 0px 2px 0px 2px;
+  @include background(image-url("edit16x16.png") no-repeat);
+  a {
+    display: block;
+    line-height: 16px;
+  }
+}
+
+.scrolled-section {
+ width: 100%;
+  height: 150px;
+  overflow: scroll;
+}

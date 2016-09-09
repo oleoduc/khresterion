@@ -1,0 +1,23 @@
+<div class="coherencepanel">
+    <div class="label-yesno" tooltip-trigger tooltip-placement="bottom" tooltip-popup-delay="500"
+         tooltip-html-unsafe="{{combo.property.tooltip}}">
+        <label class="" ng-class="{'kb-advised': combo.property.isClassAdvised,'kb-excluded-violated': combo.property.isClassIncoherent,
+    'kb-label-uncomplete': combo.property.isClassUncomplete,'kb-disadvised': combo.property.isClassDisadvised}">{{combo.property.label}}</label>
+    </div>
+    <div class="field-container">
+        <button class="btn-yesno" tooltip-trigger tooltip-placement="bottom"
+                tooltip-popup-delay="500" tooltip-html-unsafe="{{combo.property.tooltip}}"
+                ng-class="{'kb-included': combo.property.availableValues[0].isIncluded, 'kb-excluded': !combo.property.availableValues[0].isIncluded, 'kb-advised': combo.property.availableValues[0].isAdvised}"
+                ng-click="combo.applySelected(combo.property.availableValues[0], $event)">
+        <span ng-class="{'kb-advised': combo.property.availableValues[0].isAdvised,'kb-excluded-violated': combo.property.availableValues[0].isIncoherent,
+        'kb-label-uncomplete': combo.property.availableValues[0].isUncomplete,'kb-disadvised': combo.property.availableValues[0].isDisadvised}">{{combo.property.availableValues[0].value}}</span>
+        </button>
+        <button class="btn-yesno" tooltip-trigger tooltip-placement="bottom"
+                tooltip-popup-delay="500" tooltip-html-unsafe="{{combo.property.tooltip}}"
+                ng-class="{'kb-included': combo.property.availableValues[1].isIncluded, 'kb-excluded': !combo.property.availableValues[1].isIncluded, 'kb-advised': combo.property.availableValues[1].isAdvised}"
+                ng-click="combo.applySelected(combo.property.availableValues[1], $event)">
+        <span ng-class="{'kb-advised': combo.property.availableValues[1].isAdvised,'kb-excluded-violated': combo.property.availableValues[1].isIncoherent,
+        'kb-label-uncomplete': combo.property.availableValues[1].isUncomplete,'kb-disadvised': combo.property.availableValues[1].isDisadvised}">{{combo.property.availableValues[1].value}}</span>
+        </button>
+    </div>
+</div>

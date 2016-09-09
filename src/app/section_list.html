@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="dueApp">
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content='initial-scale=1.0, maximum-scale=1.0, width=device-width' name='viewport'/>
+
+    <!-- build:css({.tmp,app}) static/css/due.min.css -->
+    <link rel="stylesheet" href="css/due.css" media="screen"/>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+</head>
+<body>
+<noscript>" JavaScript must be enabled in order for you to use Khresterion in standard view.
+    However, it seems
+    JavaScript
+    is either disabled or not supported by your browser. To use standard view, enable JavaScript by
+    changing your
+    browser options, then <a href="#" target="_top">try again</a> "
+</noscript>
+<div id="top">
+    <nav class="top-bar">
+        <ul class="inline-list">
+
+            <li>
+                <a href="/due/" target="_top">DUE v0.5</a>
+            </li>
+            <li>
+                <a href="logout" target="_top">Deconnexion</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="sidenav">
+            <div class="homelink-group">
+                <a href="etude/list?page=0&size=50" target="_top" alt="lister les etudes">
+                    <div class="homelink">Liste DUE</div>
+                </a>
+                <a href="etude/list/section" target="_top" alt="lister les sections">
+                    <div class="homelink">Liste clauses</div>
+                </a>
+                <a href="etude/list/plan" target="_top" alt="Editer les plans">
+                    <div class="homelink">Mode plan</div>
+                </a>
+                <a href="edit/accounts" target="_top" alt="gerer les comptes utilsateurs">
+                    <div class="homelink">Comptes</div>
+                </a>
+            </div>
+        </div>
+        <div class="maincontent" ng-controller="SectionListController">
+            <div co-progress type="warning" pvalue="0"
+                 is-saving="isSearching"
+                 first-message="Traitement.."
+                 second-message="Traitement en cours..." start-event="searchStart"
+                 end-event="searchFinished"></div>
+            <div>
+                <div class="columns small-12">
+                    <div>
+                        <h2>Liste des sections</h2>
+                        <span>Notes: les clauses doivent etre sauvegardees une par une.
+                    Le mode plan permet de les assembler. Pour modifier le mode plan aller dans <a href="etude/list/plan" target="_top">l'editeur de plan</a>.
+                </span>
+                        <hr>
+                        <ul class="inline-list">
+                            <li><span>Type</span></li>
+                            <li><select
+                                    ng-options="entity.typeId for entity in entityList track by entity.id"
+                                    ng-model="param.selected"></select></li>
+                            <li>
+                                <button class="button tiny" ng-click="createSection(param.selected)">Cr&eacute;er Section</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dbview" ng-cloak>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="shrinkcolumn">Type</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="section in sectionList track by section.id">
+                                <th>{{section.id}}</th>
+                                <td class="shrinkcolumn"><div>{{section.name | limitTo: 60 : 11}}</div></td>
+                                <td>
+                                    <div class="iconplay"><a href="etude/edit/section?type_id={{section.name}}&section_id={{section.id}}"
+                                                             target="_top" title="Editer">&nbsp;</a></div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th colspan="3"></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <footer class="row">
+                <div class="large-12 columns">
+                    <hr>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <p>&copy; Khresterion 2015-2016.</p>
+                        </div>
+                        <div class="large-6 columns">
+                            <ul class="inline-list right">
+                                <li>
+                                    <a href="#">.</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    <!-- build:js({.tmp,app}) static/js/jquery/1.11.1/jquery.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/jquery/1.11.1/jquery.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) static/js/jquery/jquery.min.js -->
+    <!--[if gte IE 9]><!-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!--<![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+    <!--[if lt IE 9]>
+    <script src="js/polyfill/rem.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app})  static/js/openlib.js -->
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+    <script src="bower_components/foundation/js/foundation/foundation.js"></script>
+    <script src="bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js({.tmp,app})  static/js/sectionlist.min.js -->
+    <script src="js/modules/animations/progressbar.js"></script>
+    <script src="js/modules/animations/spinnerbar.js"></script>
+    <script src="js/modules/etude/sectionlist.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="dueApp">
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content="initial-scale=1,maximum-scale=1,width=device-width" name="viewport">
+
+    <link rel="stylesheet" href="static/css/due.min.d24eb275.css" media="screen">
+
+    <!--[if lt IE 9]>
+    <script src="static/js/json3/lib/json3.min.82255f24.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="static/js/es5-shim/es5-shim.min.167f3981.js"></script>
+    <![endif]-->
+    <script>
+        window.type_id = "${type_id}";
+        window.section_id = "${section_id}"
+    </script>
+</head>
+<body>
+
+<div class="top">
+    <nav class="top-bar legendbar">
+        <ul class="inline-list">
+            <li><h2>DUE v0.5</h2></li>
+            <li><a href="logout"><span>Deconnexion</span></a></li>
+            <li><span>Code couleur: </span></li>
+            <li class="kb-count-uncomplete"><span>&nbsp;</span></li>
+            <li class="kb-label-uncomplete"><span>Incomplet</span></li>
+            <li class="kb-count-advised"><span>&nbsp;</span></li>
+            <li class="kb-advised"><span>Conseill&eacute;</span></li>
+            <li class="kb-count-disadvised"><span>&nbsp;</span></li>
+            <li class="kb-disadvised"><span>D&eacute;conseill&eacute;</span></li>
+            <li class="kb-count-excluded-violated"><span>&nbsp;</span></li>
+            <li class="kb-excluded-violated"><span>Incoh&eacute;rent</span></li>
+        </ul>
+    </nav>
+    <div class="row" ng-cloak>
+    <!-- Section0 -->
+    <div class="small-8 columns">
+        <div class="row" ng-controller="SectionController">
+        <!-- Progression Bars -->
+        <div co-progress type="warning" pvalue="0" is-saving="isSearching" first-message="Traitement.." second-message="Traitement en cours..." start-event="searchStart" end-event="searchFinished"></div>
+        <div>
+            <h3>{{Section0.typeId |limitTo:100:11}}</h3> <span>&nbsp;Date cr&eacute;ation {{Section0.date_created| date: 'short'}}</span><hr>
+            <ul class="inline-list">
+                <li><button class="button tiny" ng-click="save()">Sauver</button></li>
+                <li><button class="button tiny" ng-click="saveAndClose()">Sauver &amp; Fermer</button></li>
+                <li><button class="button tiny" ng-click="close()">Fermer</button></li>
+            </ul>
+        </div>
+
+        <div class="aggregate">
+            <div class="aggregate-body">
+                    <co-textarea bo="Section0" property="Section0.Texte"></co-textarea>
+            </div>
+        </div>
+        </div>
+        <footer class="row">
+            <div class="large-12 columns">
+                <hr>
+                <div class="row">
+                    <div class="large-6 columns">
+                        <p>&copy; Khresterion 2015-2016</p>
+                    </div>
+                    <div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="small-4 columns">
+        <div class="variable-container" ng-controller="VariableController">
+            <div class="aggregate-header">
+                <h3>Variables <button class="button tiny" ng-click="openModal()">Nouvelle variable</button>
+                </h3>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="var-key">Cl&eacute;</th>
+                        <th class="var-action">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-show="isEmptyTable">
+                        <td colspan="2">Liste vide</td>
+                    </tr><tr ng-repeat="variable in variableList track by variable.varkey">
+                        <td class="var-key">{{variable.varkey}}</td>
+                        <td class="var-action"><a class="button tiny" href="" ng-click="openModal(variable.varkey,variable.value)">Modifier</a></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</div>
+</body>
+<!--[if lt IE 9]>
+<script src="static/js/jquery/1.11.1/jquery.min.35da7198.js"></script>
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<script src="static/js/jquery/jquery.min.29a73cfd.js"></script>
+<!--<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="static/js/polyfill/rem.min.0870cc19.js"></script>
+<![endif]-->
+
+<script src="static/js/openlib.5c28e191.js"></script>
+
+<script src="static/js/tinymce/tinymce.min.js"></script>
+
+<script src="static/js/sectionedit.min.78e56ba5.js"></script>
+</html>

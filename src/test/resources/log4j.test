@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!-- -->
+<!-- Log4j Configuration -->
+<!-- -->
+<!-- ===================================================================== -->
+
+<!-- $Id: _log4j.xml,v 1.3 2009/03/11 16:31:26 sbo Exp $ -->
+
+<!-- | For more configuration infromation and examples see the Jakarta Log4j 
+	| owebsite: http://jakarta.apache.org/log4j -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<appender name="toto" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="ALL" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d{dd-MM HH:mm:ss,SSS} (%F:%M:%L)  -%m%n" />
+		</layout>
+	</appender>
+	
+	<root>
+		<priority value="ERROR" />
+		<appender-ref ref="toto" />
+	</root>
+
+	<logger name="org.docx4j">
+		<level value="OFF" />
+		<appender-ref ref="toto" />
+	</logger>
+
+	<logger name="org.docx4j.org.xhtmlrenderer.load">
+		<level value="OFF" />
+		<appender-ref ref="toto" />
+	</logger>
+	
+	<logger name="org.springframework.security.web.authentication.session">
+        <level value="TRACE" />
+        <appender-ref ref="toto" />
+    </logger>
+    
+    <logger name="org.springframework.orm.jpa">
+        <level value="INFO" />
+        <appender-ref ref="toto" />
+    </logger>
+
+	<logger name="org.flywaydb.core">
+		<level value="INFO" />
+		<appender-ref ref="toto" />
+	</logger>
+	
+	<logger name="com.mchange.v2">
+		<level value="ERROR" />
+		<appender-ref ref="toto" />
+	</logger>
+
+	<logger name="com.khresterion.kengine.core">
+		<level value="WARN" />
+		<appender-ref ref="toto" />
+	</logger>
+
+	<logger name="com.khresterion.due">
+		<level value="INFO" />
+		<appender-ref ref="toto" />
+	</logger>
+
+</log4j:configuration>

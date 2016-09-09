@@ -1,0 +1,313 @@
+#treeview-container {
+    position: relative;
+    top: 50px;
+}
+
+#treeview {
+    background-color: lightgrey;
+}
+
+#treeview li {
+    list-style-type: none;
+}
+
+.item {
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+.openList {
+    position: relative;
+    display: inline-block;
+}
+
+.section {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width:144px;
+    line-height:24px;
+    padding-left: 5px;
+    padding-right: -30px;
+    color: white;
+    background:url(../img/section1.png) no-repeat;
+}
+
+.section:hover {
+    background:url(../img/section2.png) no-repeat;
+}
+
+.listAlts {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.alt {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.newAlt {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    margin-left: -44px;
+    background:url(../img/newAlt1.png) no-repeat;
+}
+
+.newAlt:hover {
+    background:url(../img/newAlt2.png) no-repeat;
+}
+
+.plus {
+    width: 20px;
+    height: 20px;
+    background:url(../img/plus1.png) no-repeat;
+}
+
+.plus:hover {
+    background:url(../img/plus2.png) no-repeat;
+}
+
+#info {
+    position: absolute;
+    display: none;
+    border-radius: 2px;
+    background-color: #a0d3e8;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.ctxmenu
+{
+  position: absolute; 
+  min-width: 128px;
+  height:auto;
+  padding: 8px;
+  margin:0;
+  border: 1px solid #999;
+  background: #F8F8F8;
+  box-shadow: 2px 2px 2px #AAA;
+  z-index:11;
+  overflow: visible;
+}
+
+.ctxline
+{
+  display:block;
+  margin:0px;
+  padding:2px 2px 2px 8px;
+  border:1px solid #F8F8F8;
+  border-radius:3px;
+  font-size:13px;
+  font-family:Arial, Helvetica, sans-serif;
+  overflow:visible;
+}
+
+.ctxline:hover
+{
+  border:1px solid #BBB;
+  background-color: #F0F0F0;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%,
+    from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',
+    endColorstr='#e6e6e6', GradientType=0);
+}
+
+.modal {
+    position: absolute;
+    background-color: whitesmoke;
+    left: 200px;
+    top: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+    border:1px solid dimgrey;
+    z-index: 1000;
+}
+
+.modal ul {
+    position: relative;
+    width: 600px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.modal ul li {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.close-modal {
+    position: relative;
+    left: 600px;
+    color: dimgrey;
+    font-size: 20pt;
+}
+
+.button-modal {
+    border:0px solid #cacaca; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;font-weight:bold; color: darkslategrey;
+    background-color: #E6E6E6; background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+    background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
+}
+
+.button-modal:hover{
+    background-color: #cdcdcd; background-image: -webkit-gradient(linear, left top, left bottom, from(#cdcdcd), to(#b3b3b3));
+    background-image: -webkit-linear-gradient(top, #cdcdcd, #b3b3b3);
+    background-image: -moz-linear-gradient(top, #cdcdcd, #b3b3b3);
+    background-image: -ms-linear-gradient(top, #cdcdcd, #b3b3b3);
+    background-image: -o-linear-gradient(top, #cdcdcd, #b3b3b3);
+    background-image: linear-gradient(to bottom, #cdcdcd, #b3b3b3);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#cdcdcd, endColorstr=#b3b3b3);
+}
+
+#help {
+    background-image:url(../img/help1.png);
+    background-size: 100% auto;
+    background-position: center;
+    width:20px;
+    height:20px;
+    display:block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#help:hover {
+    background-image:url(../img/help2.png);
+}
+
+.alternative {
+    margin-left: -48px;
+    vertical-align: top;
+    width:160px;
+    line-height:24px;
+    padding-left: 20px;
+    background:url(../img/alt1.png) no-repeat;
+}
+
+.alternative:hover {
+    background:url(../img/alt2.png) no-repeat;
+}
+
+.ctx-container{
+    position: absolute;
+    width: 150px;
+    background-color: floralwhite;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.close-ctx{
+    position: relative;
+    color: dimgrey;
+    left: 130px;
+    top: -7px;
+    font-size: 20pt;
+}
+
+.remove {
+    position: relative;
+    color: darkslategrey;
+    display: inline-block;
+    text-align: center;
+    top: -17px;
+    width: 100%;
+}
+
+.remove:hover {
+    background-color: darkslategrey;
+    color: white;
+}
+
+.details {
+    z-index: 500;
+    position: absolute;
+    width: 240px;
+    height: 140px;
+    background-color: floralwhite;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+}
+
+.details ul {
+    position: relative;
+    margin: 5px;
+    margin-left: 15px;
+    margin-top: 0px;
+}
+
+.details ul li{
+    font-size: 10pt;
+    padding: 0;
+}
+
+.presence {
+    position: relative;
+    display: inline-block;
+    color: black;
+}
+
+.buttonPresence {
+    position: relative;
+    display: inline-block;
+    left: 31px;
+}
+
+.estInclu {
+    position: relative;
+    display: inline-block;
+}
+
+.buttonEstInclu {
+    position: relative;
+    display: inline-block;
+    left: 40px;
+}
+
+.altInclu {
+    position: relative;
+    display: inline-block;
+    top: 10px;
+}
+
+.checkboxAltInclu {
+    position: relative;
+    display: inline-block;
+    left: 25px;
+    top: 10px;
+}
+
+.close-details {
+    position: relative;
+    left: 210px;
+    color: dimgrey;
+    font-size: 20pt;
+    top: -7px;
+}
+
+.comp {
+    position: relative;
+    color: darkslategrey;
+    display: inline-block;
+    text-align: center;
+    top: 5px;
+    width: 100%;
+}
+
+.comp:hover {
+    background-color: darkslategrey;
+    color: white;
+}

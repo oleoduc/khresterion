@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="userApp">
+<head>
+  <title>#springMessage("app.title")</title>
+  <!--[if gt IE 9]><!-->
+  <base href="/due/">
+  <!--<![endif]-->
+  <!--[if lte IE 9]>
+  <base href="https://${server_name}/due/">
+  <![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+  <meta content='initial-scale=1.0, maximum-scale=1.0, width=device-width' name='viewport'/>
+
+  <!-- build:css({.tmp,app}) static/css/due.min.css -->
+  <link rel="stylesheet" href="css/due.css" media="screen"/>
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+  <!--[if lt IE 9]>
+  <script src="bower_components/json3/lib/json3.js"></script>
+  <![endif]-->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+  <!--[if lt IE 9]>
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <![endif]-->
+  <!-- endbuild -->
+</head>
+<body>
+<noscript>" JavaScript must be enabled in order for you to use Khresterion in standard view. However, it seems
+  JavaScript
+  is either disabled or not supported by your browser. To use standard view, enable JavaScript by changing your
+  browser options, then <a href="#" target="_top">try again</a> "
+</noscript>
+<div id="top" class="rootpane">
+  <div class="row kbdheader">
+    <div class="columns small-6 kbdlogo"><h4>&nbsp;</h4></div>
+    <div class="columns small-6">
+      <ul class="inline-list left nobullet">
+        <li><a class="actionbutton" href="/due/" target="_top">Home</a></li>
+        <li><a class="actionbutton" href="logout" target="_top">#springMessage("app.logout")</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row container">
+    <div ng-controller="UserController">
+      <div class="aggregate">
+        <div class="aggregate-body"><span class="danger">{{errorBox}}</span></div>
+      </div>
+      #if($current_role == "ROLE_MANAGER")
+      <div class="aggregate">
+        <div class="aggregate-header"><h5>Cr&eacute;ation </h5></div>
+        <div class="aggregate-body">
+          <form>
+            <div class="row">
+              <div class="small-3 column"><label for="inname">Utilisateur (mail) </label></div>
+              <div class="small-9 column">
+                <input type="text" ng-model="username" id="inname"/></div>
+            </div>
+
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="inpass">Mot de passe </label></div>
+              <div class="small-9 column">
+                <input type="password" ng-model="password" id="inpass"/></div>
+            </div>
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="inconfirmpass">Confirmer mot de passe </label></div>
+              <div class="small-9 column">
+                <input type="password" ng-model="confirmpassword" id="inconfirmpass" ng-blur="checkPassword()"/>
+                <span class="danger">{{pswdErrorMessage}}</span></div>
+            </div>
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="inln">Nom </label></div>
+              <div class="small-9 column">
+                <input type="text" ng-model="lastname" id="inln"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="infn">Pr&eacute;nom </label></div>
+              <div class="small-9 column">
+                <input type="text" ng-model="firstname" id="infn"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="indesc">Organisation </label></div>
+              <div class="small-9 column">
+                <input type="text" ng-model="organisation" id="indesc"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-3 column"><label class="label" for="inrole">Profil </label></div>
+              <div class="small-3 end column">
+                <select ng-model="role" id="inrole"
+                        ng-options="roleObject as roleObject.externalName for roleObject in roleList track by roleObject.id">
+                  <option>---</option>
+                </select></div>
+            </div>
+          </form>
+        </div>
+        <div class="aggregate-footer">
+          <button class="actionbutton" ng-click="createUser()">Cr&eacute;er un nouvel utilisateur</button>
+          <button class="actionbutton" ng-click="updateUser()">Mettre &agrave; jour (uniquement nom,prenom,
+            organisation)
+          </button>
+        </div>
+      </div>
+      #end
+      <div class="aggregate">
+        <div class="aggregate-header"><h5>Changement mot de passe</h5></div>
+        <div class="aggregate-body">
+          <div class="row">
+            <div class="small-3 column"><label for="inchgname">Utilisateur (mail) </label></div>
+            <div class="small-9 column">
+              <input type="text" readonly="readonly" ng-model="cgusername" id="inchgname"/></div>
+          </div>
+
+          <div class="row">
+            <div class="small-3 column"><label class="label" for="incgpass">Mot de passe </label></div>
+            <div class="small-9 column">
+              <input type="password" ng-model="cgpassword" id="incgpass"/></div>
+          </div>
+          <div class="row">
+            <div class="small-3 column"><label class="label" for="incgconfirmpass">Confirmer mot de passe </label></div>
+            <div class="small-9 column">
+              <input type="password" ng-model="confirmcgpassword" id="incgconfirmpass" ng-blur="checkCGPassword()"/>
+              <span class="danger">{{cgpswdErrorMessage}}</span></div>
+          </div>
+        </div>
+        <div class="aggregate-footer">
+          <button class="actionbutton" ng-click="resetPassword()">Changer mot de passe</button>
+        </div>
+      </div>
+      <div class="aggregate">
+        <div class="aggregate-header"><h5>Changement de Profil</h5></div>
+        <div class="aggregate-body">
+          <div class="row">
+            <div class="small-3 column"><label for="incprusername">Utilisateur (mail) </label></div>
+            <div class="small-9 column">
+              <input type="text" readonly="readonly" ng-model="updusername" id="incprusername"/></div>
+          </div>
+          <div class="row">
+            <div class="small-3 column"><label class="label" for="incprrole">Nouveau Profil</label></div>
+            <div class="small-3 column end">
+              <select ng-model="updrole" id="incprrole"
+                      ng-options="roleObject as roleObject.externalName for roleObject in roleList track by roleObject.id">
+                <option>---</option>
+              </select>
+            </div>
+          </div>
+          <div class="aggregate-footer">
+            <button class="actionbutton" ng-click="changeRole()">Changer Profil</button>
+          </div>
+        </div>
+
+        <div class="aggregate">
+          <div class="dbview" id="entitytable">
+            <table>
+              <thead>
+              <tr>
+                <th>Mail</th>
+                <th>Nom</th>
+                <th>Organisation</th>
+                <th>Profil</th>
+                <th>Statut</th>
+                <th>Cr&eacute;ation <a href="" ng-click="predicate = 'dateModified'; reverse=!reverse"> v</a></th>
+                <th>Modification <a href="" ng-click="predicate = 'dateModified'; reverse=!reverse"> v</a></th>
+                <th class="table-action">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="elem in userList | orderBy:predicate:reverse track by elem.id ">
+                <td>{{elem.username}}</td>
+                <td>{{elem.firstName}} {{elem.lastName}}</td>
+                <td>{{elem.organisation}}</td>
+                <td>{{elem.roleList[0].externalName}}</td>
+                <td><span  ng-class="{'kb-violated': elem.deleted, 'kb-advised': !elem.deleted}">{{elem.deleted?'Inactif':'Actif'}}</span></td>
+                <td>{{elem.dateCreated | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{elem.dateModified | date: 'dd/MM/yyyy HH:mm'}} by {{elem.modifiedby}}</td>
+                <td class="table-accountaction">
+                  <div>
+                    <div class="iconplay">
+                      <a href="" title="Modifier Profil"
+                         ng-click="modifyUser(elem)">Modifier</a>
+                    </div>
+                    #if($current_role == "ROLE_MANAGER")
+                    <div class="iconact">
+                      <a href="" title="Activer/Desactiver" ng-click="activateUser(elem.username, elem.deleted)">Activer/Desactiver</a>
+                    </div>
+                    <div class="iconremove">
+                      <a href="" title="Supprimer" ng-click="removeUser(elem.username)">Supprimer</a>
+                    </div>
+                    #end
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th colspan="8">
+                  <div class="pageinfo-wrapper">
+                    <span>{{pageinfo.numberOfElements}} item(s) sur {{pageinfo.totalElements}}</span>
+                    <span class="pageinfo-content">page {{pageinfo.number + 1}}/{{pageinfo.totalPages}}</span>
+                    <input type="button" class="actionbutton" ng-click="getFirstTablePage()" value="I&lt;&lt; "/>
+                    <input type="button" class="actionbutton" ng-click="getPreviousTablePage()" value="&lt; "/>
+                    <input type="button" class="actionbutton" ng-click="getNextTablePage()" value="&gt; "/>
+                    <input type="button" class="actionbutton" ng-click="getLastTablePage()" value="&gt;&gt;I"/></div>
+                </th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- build:js({.tmp,app}) static/js/jquery/1.11.1/jquery.min.js -->
+  <!--[if lt IE 9]>
+  <script src="bower_components/jquery/1.11.1/jquery.min.js"></script>
+  <![endif]-->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) static/js/jquery/jquery.min.js -->
+  <!--[if gte IE 9]><!-->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <!--<![endif]-->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+  <!--[if lt IE 9]>
+  <script src="js/polyfill/rem.js"></script>
+  <![endif]-->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app})  static/js/userlib.js -->
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+  <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+  <script src="bower_components/foundation/js/foundation/foundation.js"></script>
+  <script src="bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app})  static/js/useradmin.min.js -->
+    <script src="js/modules/useradmin/admin.user.js"></script>
+  <script src="js/modules/useradmin/user.js"></script>
+  <!-- endbuild -->
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+/**
+ * Created by Khresterion on 3/2/15.
+ */
+@import "compass/css3/images";
+
+$blueCoherence:#0071BC;
+$greenCoherence:#39A805;
+$redCoherence:#C1272D;
+$orangeCoherence:#F7931E;
+$pinkCoherence: #F9E9EA;
+/*
+* styles for coherence colors and effects
+* KBUILDER
+*/
+.kb-none {
+  color: $black;
+}
+
+.kb-uncomplete {
+  color: $blueCoherence !important;
+  background-color: #CAEDFF !important;
+}
+
+.kb-label-uncomplete {
+  color: $blueCoherence !important;
+  font-weight: bold;
+}
+
+.kb-btn-uncomplete {
+  color: $blueCoherence !important;
+  font-weight: bold;
+}
+
+.kb-list-uncomplete {
+  background-color: #CAEDFF !important;
+}
+
+.kb-advised {
+
+  color: $greenCoherence !important;
+  font-weight: bold;
+}
+
+.kb-list-advised {
+
+  background-color: $white;
+  color: $greenCoherence !important;
+  font-weight: bold;
+}
+
+.kb-disadvised {
+
+  color: $orangeCoherence !important;
+  font-weight: bold;
+}
+
+.kb-list-disadvised {
+
+  background-color: $white;
+  color: $orangeCoherence !important;
+  font-weight: bold;
+}
+
+.kb-violated {
+
+  color: $redCoherence !important;
+  font-weight: bold;
+}
+
+.kb-excluded-violated {
+  color: $redCoherence !important;
+  font-weight: bold;
+}
+
+.kb-list-excluded-violated {
+  background-color: tint(#F9E9EA, 80%) !important;
+  color: $redCoherence !important;
+  font-weight: bold;
+}
+
+.kb-excluded-violated.kb-included {
+  background-color: $pinkCoherence !important;
+}
+
+.kb-included {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/*buttons*/
+button.kb-excluded {
+  background-color: tint(#F9E9EA, 80%) !important;
+  border: 1px solid #eee;
+  border-style: outset;
+}
+
+button.kb-excluded.kb-advised {
+  background-image: none !important;
+  background-color: tint(#229922, 80%) !important;
+  border: 1px solid #eee;
+  border-style: outset;
+}
+
+button.kb-included {
+  background-color: $white;
+  border-style: inset;
+}
+
+/*add mouseover effects*/
+
+/*counter*/
+.kb-count-uncomplete {
+  background-color: $blueCoherence !important;
+  color: #EFEFEF !important;
+}
+
+.kb-count-advised {
+
+  background-color: $greenCoherence !important;
+  color: #EFEFEF !important;
+}
+
+.kb-count-disadvised {
+
+  background-color: $orangeCoherence !important;
+  color: #EFEFEF !important;
+}
+
+.kb-count-excluded-violated{
+
+  background-color: $redCoherence !important;
+  color: #EFEFEF !important;
+}
+
+.kb-count-hidden{
+
+  background-color: transparent !important;
+  color: #EFEFEF !important;
+}
+
+.kb-disabled {
+  background-color: #F0F0F0 !important;
+  color: #999999 !important;
+}

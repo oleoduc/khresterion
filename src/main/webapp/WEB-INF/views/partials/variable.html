@@ -1,0 +1,34 @@
+<div>
+  <div class="aggregate">
+    <div class="aggregate-header"><h3>Editeur de variables</h3></div>
+    <div class="aggregate-body">
+      <div class="row">
+        <div class="small-2 column"><label for="idkey">
+          <span>Nom de variable </span></label></div>
+        <div ng-show="!editmode" class="small-10 column"><input type="text" ng-model="mvariable.key" id="idkey" tabindex="1" autofocus/></div>
+        <div ng-show="editmode" class="small-10 column"><span>{{mvariable.key}}</span></div>
+      </div>
+      <div class="row">
+        <div class="small-2 column"><label for="idvalue"><span>Valeur/Code</span></label></div>
+        <div class="small-10 column"><input type="text" ng-model="mvariable.value" id="idvalue"/></div>
+      </div>
+      <div class="row">
+        <div class="small-12 column"><span class="label label-alert">{{errorMessage}}</div>
+      </div>
+      <div class="row">
+        <div class="small-12 column">
+          <small>Les caract&egrave;res autoris&eacute;s dans les noms de variable sont a-z, A-Z, _, 0-9. Les espaces
+            sont automatiquement remplac&eacute;s  par des underscore (_).<br>
+            Exemples de noms: NomDeLentreprise, Adherent_12364
+          </small>
+          </div>
+      </div>
+    </div>
+    <div class="aggregate-footer">
+    <div class="row">
+      <button class="button tiny" ng-click="confirm()">Sauver</button>
+      <button class="button tiny" ng-click="cancel()">Fermer</button>
+    </div>
+</div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="coherencepanel">
+    <div class="label-container"><label class="" ng-class="{'kb-advised': vm.property.isAdvised,'kb-excluded-violated': vm.property.isIncoherent,
+    'kb-label-uncomplete': vm.property.isUncomplete,'kb-disadvised': vm.property.isDisadvised}">{{vm.property.label}}</label>
+    </div>
+    <div class="combobase" tooltip-html-unsafe="{{vm.property.tooltip}}" tooltip-trigger
+         tooltip-placement="bottom" tooltip-popup-delay="500">
+        <div class="selectbox">
+            <div class="comboinput">
+                <input class="{{vm.comboclass}}" ng-class="{'kb-list-advised': vm.property.isClassAdvised,'kb-list-excluded-violated': vm.property.isClassIncoherent,
+            'kb-list-uncomplete': vm.property.isClassUncomplete,'kb-list-disadvised': vm.property.isClassDisadvised}"
+                       type="text" ng-blur="vm.updateProperty($event)"
+                       ng-model="vm.property.value"/>
+                <button ng-class="{'arrowbold': vm.property.isClassAdvised || vm.property.isClassIncoherent}">
+                    <span class="caret"></span></button>
+                <div class="{{vm.comboclass}}"
+                     ng-class="{hiddenlist: !vm.isVisible,showlist: vm.isVisible}">
+                    <p ng-click="vm.applySelected(null, $event)">&nbsp;</p>
+                    <p ng-class="{'kb-advised': elem.isAdvised,'kb-excluded-violated': elem.isIncoherent,
+            'kb-uncomplete': elem.isUncomplete,'kb-disadvised': elem.isDisadvised}"
+                       ng-repeat="elem in vm.property.availableValues"
+                       ng-click="vm.applySelected(elem, $event)">{{elem.value}}</p>
+                    <p ng-class="{'kb-advised': elem.isAdvised,'kb-excluded-violated': elem.isIncoherent,
+            'kb-uncomplete': elem.isUncomplete,'kb-disadvised': elem.isDisadvised}"
+                       ng-repeat="elem in vm.property.uncompleteValues"
+                       ng-click="vm.applySelected(elem, $event)">{{elem.value}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="dueApp">
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content='initial-scale=1.0, maximum-scale=1.0, width=device-width' name='viewport'/>
+
+    <!-- build:css({.tmp,app}) static/css/due.min.css -->
+    <link rel="stylesheet" href="css/due.css" media="screen"/>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <script>
+        window.type_id = "${type_id}";
+        window.section_id = "${section_id}"
+    </script>
+</head>
+<body>
+
+<div class="top">
+    <nav class="top-bar legendbar">
+        <ul class="inline-list">
+            <li><h2>DUE v0.5</h2></li>
+            <li><a href="logout"><span>Deconnexion</span></a></li>
+            <li><span>Code couleur: </span></li>
+            <li class="kb-count-uncomplete"><span>&nbsp;</span></li>
+            <li class="kb-label-uncomplete"><span>Incomplet</span></li>
+            <li class="kb-count-advised"><span>&nbsp;</span></li>
+            <li class="kb-advised"><span>Conseill&eacute;</span></li>
+            <li class="kb-count-disadvised"><span>&nbsp;</span></li>
+            <li class="kb-disadvised"><span>D&eacute;conseill&eacute;</span></li>
+            <li class="kb-count-excluded-violated"><span>&nbsp;</span></li>
+            <li class="kb-excluded-violated"><span>Incoh&eacute;rent</span></li>
+        </ul>
+    </nav>
+    <div class="row" ng-cloak>
+    <!-- Section0 -->
+    <div class="small-8 columns">
+        <div class="row" ng-controller="SectionController">
+        <!-- Progression Bars -->
+        <div co-progress type="warning" pvalue="0"
+             is-saving="isSearching"
+             first-message="Traitement.."
+             second-message="Traitement en cours..." start-event="searchStart"
+             end-event="searchFinished"></div>
+        <div>
+            <h3>{{Section0.typeId |limitTo:100:11}}</h3> <span>&nbsp;Date cr&eacute;ation {{Section0.date_created| date: 'short'}}</span><hr>
+            <ul class="inline-list">
+                <li><button class="button tiny" ng-click="save()">Sauver</button></li>
+                <li><button class="button tiny" ng-click="saveAndClose()">Sauver &amp; Fermer</button></li>
+                <li><button class="button tiny" ng-click="close()">Fermer</button></li>
+            </ul>
+        </div>
+
+        <div class="aggregate">
+            <div class="aggregate-body">
+                    <co-textarea bo="Section0" property="Section0.Texte"></co-textarea>
+            </div>
+        </div>
+        </div>
+        <footer class="row">
+            <div class="large-12 columns">
+                <hr>
+                <div class="row">
+                    <div class="large-6 columns">
+                        <p>&copy; Khresterion 2015-2016</p>
+                    </div>
+                    <div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                            <li>
+                                <a href="#">.</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="small-4 columns">
+        <div class="variable-container" ng-controller="VariableController">
+            <div class="aggregate-header">
+                <h3>Variables <button class="button tiny" ng-click="openModal()">Nouvelle variable</button>
+                </h3>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="var-key">Cl&eacute;</th>
+                        <th class="var-action">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-show="isEmptyTable">
+                        <td colspan="2">Liste vide</td>
+                    <tr ng-repeat="variable in variableList track by variable.varkey">
+                        <td class="var-key">{{variable.varkey}}</td>
+                        <td class="var-action"><a class="button tiny" href="" ng-click="openModal(variable.varkey,variable.value)">Modifier</a></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</div>
+</body>
+<!-- build:js({.tmp,app}) static/js/jquery/1.11.1/jquery.min.js -->
+<!--[if lt IE 9]>
+<script src="bower_components/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) static/js/jquery/jquery.min.js -->
+<!--[if gte IE 9]><!-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+<!--[if lt IE 9]>
+<script src="js/polyfill/rem.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app})  static/js/openlib.js -->
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+<script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+<script src="bower_components/foundation/js/foundation/foundation.js"></script>
+<script src="bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app})  static/js/tinymce/tinymce.min.js -->
+<script src="bower_components/tinymce/tinymce.js"></script>
+<script src="bower_components/tinymce/langs/fr_FR.js"></script>
+<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+<script src="js/modules/kengine/cotextearea.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app})  static/js/sectionedit.min.js -->
+<script src="js/modules/kengine/kengine.property.js"></script>
+<script src="js/modules/kengine/kengine.instance.js"></script>
+<script src="js/modules/kengine/kengine.reification.js"></script>
+<script src="js/modules/animations/progressbar.js"></script>
+<script src="js/modules/animations/spinnerbar.js"></script>
+<script src="js/modules/kengine/cosimple.js"></script>
+<script src="js/modules/kengine/codate.js"></script>
+<script src="js/modules/etude/sectionedit.js"></script>
+<!-- endbuild -->
+</html>

@@ -1,0 +1,9 @@
+<div>
+    <div>
+        <div><button class="button tiny" ng-click="com.preview($event)">Preview</button></div>
+    <form>
+        <textarea ui-tinymce="com.tinymceOptions" ng-model="com.property.value"></textarea>
+    </form>
+    </div>
+    <div class="prevredac" ng-bind-html="com.trustedText"></div>
+</div>

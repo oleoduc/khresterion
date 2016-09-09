@@ -1,0 +1,43 @@
+/***
+* Gradle 2.1 build file
+* gathers in single step the Grunt script in src and maven command for packaging the WAR
+* In Eclipse, use the External Tools Configurations. Create a new Program containing the command line
+*
+* gradle -i -b build.gradle
+*
+***/
+
+task gruntBuild(type: Exec){
+    workingDir 'src/'
+    commandLine 'cmd','/c','grunt','build','--force'
+}
+
+task deleteStatics(type: Delete, dependsOn: gruntBuild){
+    delete 'src/main/webapp/static'
+    delete 'src/main/webapp/WEB-INF/views'
+}
+
+task copyViews(type: Copy, dependsOn: deleteStatics){
+    from 'src/dist/WEB-INF/views'
+    into 'src/main/webapp/WEB-INF/views'
+}
+
+task copyStaticFiles(type: Copy, dependsOn: deleteStatics){
+    from 'src/dist/static'
+    into 'src/main/webapp/static'
+}
+
+task gruntClean(type: Exec){
+    workingDir 'src/'
+    commandLine 'cmd','/c','grunt','clean','--force'
+}
+
+task fullBuild(type: Exec, dependsOn: [copyViews,copyStaticFiles]){
+    commandLine 'cmd','/c','mvn.bat','-U','clean','package'
+}
+
+task warOnly(type: Exec){
+    commandLine 'cmd','/c','mvn.bat','-o','-U','clean','package'
+}
+
+defaultTasks 'fullBuild', 'gruntClean'

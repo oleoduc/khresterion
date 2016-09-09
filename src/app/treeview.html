@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="dueApp">
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content="initial-scale=1,maximum-scale=1,width=device-width" name="viewport">
+
+	<!-- build:css({.tmp,app}) static/css/due.min.css -->
+	<link rel="stylesheet" href="css/due.css" media="screen"/>
+	<!-- endbuild -->
+	<!-- build:css({.tmp,app}) static/css/treeview.min.css -->
+	<link rel="stylesheet" href="css/treeview.css">
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+	<!--[if lt IE 9]>
+	<script src="bower_components/json3/lib/json3.js"></script>
+	<![endif]-->
+	<!-- endbuild -->
+	<!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+	<!--[if lt IE 9]>
+	<script src="bower_components/es5-shim/es5-shim.js"></script>
+	<![endif]-->
+	<!-- endbuild -->
+
+    <script>
+		window.envkey = "${envkey}";
+		window.plan_id = "${plan_id}";
+    </script>
+</head>
+<body>
+	<div id="top">
+		<nav class="top-bar legendbar">
+	        <ul class="inline-list">
+	            <li>
+	                <h1>DUE v0.3</h1>
+	            </li>
+	            <li>
+	                <a href="logout"><span>Deconnexion</span></a>
+	            </li>
+	        </ul>
+	    </nav>
+		<!-- item template -->
+		<div ng-controller="PlanViewController">
+			<!-- Progression Bars -->
+			<div co-progress type="warning" pvalue="0" is-saving="isSearching" first-message="Traitement.." second-message="Traitement en cours..." start-event="searchStart" end-event="searchFinished"></div>
+			<div class="row">
+				<div class="small-6 columns">
+					<div class="duetree-holder">
+						<h2>Treeview</h2>
+						<div id="treeview_container">
+                            <script type="text/x-template" id="item-template">
+                                <div id="treeview">
+                                    <li>
+                                        <div @contextmenu.prevent="menu()"
+                                            id="s{{model.id+1}}"
+                                            data-tooltip aria-haspopup="true" title="{{model.fullname}}"
+                                            class="section"
+                                            :class="{alternative: model.isAlt}"
+                                            @click="show">
+                                            {{model.name}}
+                                        </div>
+                                        <ul class="listAlts">
+                                            <item
+                                                class="alt"
+                                                v-for="model in model.alts"
+                                                :model="model">
+                                            </item>
+											<div
+													class="newAlt"
+													v-show="model.newAltPresent"
+													@click="showModal(false)">
+											</div>
+                                        </ul>
+										<div class="ctx-container" id="ctx{{model.id+1}}" v-show="showCtx" @click="closeCtx">
+											<a @click="closeCtx" class="close-ctx">&#215;</a>
+											<a class="remove" @click="removeSection(model.id+1)">Supprimer</a>
+										</div>
+                                        <ul v-if="isFolder" id="{{model.id+1}}" class="children">
+                                            <item
+                                                class="item"
+                                                v-for="model in model.children"
+                                                :model="model">
+                                            </item>
+                                            <li class="plus" @click="showModal(true)"></li>
+                                        </ul>
+                                        <div v-show="open" class="modal">
+                                            <a @click="closeModal" class="close-modal">&#215;</a>
+                                            <ul>
+                                                <li v-for="name in model.nameSec"
+                                                    :model="model">
+                                                    <button class="button-modal" @click="addSection(name)" type="button">{{name}}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+										<div id="details{{model.id+1}}" class="details" v-show="showDetails">
+											<a @click="closeDetails" class="close-details">&#215;</a>
+											<ul>
+												<li><div class="presence">Est pr&eacute;sente</div> <div class="buttonPresence"><input type="button" value="OUI"><input type="button" value="NON"> </div> </li>
+ 												<li><div class="estInclu">Est incluse</div> <div class="buttonEstInclu"><input type="button" value="OUI"><input type="button" value="NON"> </div></li>
+											</ul>
+											<a class="comp" @click="showModal()">Ajouter une Composante</a>
+										</div>
+                                    </li>
+                                </div>
+                            </script>
+						</div>
+
+						<div id="help" data-tooltip aria-haspopup="true" title="Double-cliquez sur une section pour lui ajouter une première sous-section"></div>
+
+						<!-- the demo root element -->
+						<ul id="demo">
+							<item
+								class="item"
+								:model="treeData">
+							</item>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+
+			<footer class="row">
+				<div class="large-12 columns">
+					<hr>
+					<div class="row">
+						<div class="large-6 columns">
+							<p>&copy; Khresterion 2015-2016</p>
+						</div>
+						<div class="large-6 columns">
+							<ul class="inline-list right">
+								<li>
+									<a href="#">.</a>
+								</li>
+								<li>
+									<a href="#">.</a>
+								</li>
+								<li>
+									<a href="#">.</a>
+								</li>
+								<li>
+									<a href="#">.</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<!-- build:js({.tmp,app}) static/js/jquery/1.11.1/jquery.min.js -->
+	<!--[if lt IE 9]>
+	<script src="bower_components/jquery/1.11.1/jquery.min.js"></script>
+	<![endif]-->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app}) static/js/jquery/jquery.min.js -->
+	<!--[if gte IE 9]><!-->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<!--<![endif]-->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+	<!--[if lt IE 9]>
+	<script src="js/polyfill/rem.js"></script>
+	<![endif]-->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app})  static/js/treeview.min.js -->
+	<script src="js/modules/etude/vue.js"></script>
+	<script src="js/modules/etude/treeview.js"></script>
+	<!-- endbuild -->
+
+
+	<!-- build:js({.tmp,app})  static/js/openlib_christophe.js -->
+	<script src="bower_components/underscore/underscore.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+	<script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+	<script src="bower_components/foundation/js/foundation/foundation.js"></script>
+	<script src="bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+	<script src="bower_components/foundation/js/foundation/foundation.tooltip.js"></script>
+	<!-- endbuild -->
+
+	<script>
+		$(document).foundation();
+	</script>
+
+    <!-- build:js({.tmp,app})  static/js/sectionlist.min.js -->
+    <script src="js/modules/animations/progressbar.js"></script>
+    <script src="js/modules/animations/spinnerbar.js"></script>
+    <script src="js/modules/etude/sectionlist.js"></script>
+    <!-- endbuild -->
+
+	<!-- build:js({.tmp,app})  static/js/planedit.min.js -->
+	<script src="js/modules/kengine/kengine.property.js"></script>
+	<script src="js/modules/kengine/kengine.instance.js"></script>
+	<script src="js/modules/kengine/kengine.reification.js"></script>
+	<script src="js/modules/animations/progressbar.js"></script>
+	<script src="js/modules/animations/spinnerbar.js"></script>
+	<script src="js/modules/kengine/cosimple.js"></script>
+	<script src="js/modules/kengine/codate.js"></script>
+	<script src="js/modules/etude/planlist.js"></script>
+	<!-- endbuild -->
+
+</body>
+</html>

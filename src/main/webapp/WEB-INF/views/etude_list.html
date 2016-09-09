@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content="initial-scale=1,maximum-scale=1,width=device-width" name="viewport">
+
+    <link rel="stylesheet" href="static/css/due.min.d24eb275.css" media="screen">
+
+    <!--[if lt IE 9]>
+    <script src="static/js/json3/lib/json3.min.82255f24.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="static/js/es5-shim/es5-shim.min.167f3981.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<noscript>" JavaScript must be enabled in order for you to use Khresterion in standard view.
+    However, it seems
+    JavaScript
+    is either disabled or not supported by your browser. To use standard view, enable JavaScript by
+    changing your
+    browser options, then <a href="#" target="_top">try again</a> "
+</noscript>
+<div id="top">
+    <nav class="top-bar">
+        <ul class="inline-list">
+
+            <li>
+                <a href="/due/" target="_top">DUE v0.5</a>
+            </li>
+            <li>
+                <a href="logout" target="_top">Deconnexion</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="sidenav">
+            <div class="homelink-group">
+                <a href="etude/list?page=0&size=50" target="_top" alt="lister les etudes">
+                    <div class="homelink">Liste DUE</div>
+                </a>
+                <a href="etude/list/section" target="_top" alt="lister les sections">
+                    <div class="homelink">Liste clauses</div>
+                </a>
+                <a href="etude/list/plan" target="_top" alt="Editer les plans">
+                    <div class="homelink">Mode plan</div>
+                </a>
+                <a href="edit/accounts" target="_top" alt="gerer les comptes utilsateurs">
+                    <div class="homelink">Comptes</div>
+                </a>
+            </div>
+        </div>
+            <div class="dbview">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Soci&eacute;te</th>
+                        <th>Statut</th>
+                        <th>CCN</th>
+                        <th>Cr&eacute;ation</th>
+                        <th><a class="button tiny" href="etude/edit" target="_top">Nouvelle DUE</a></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    #foreach($instance in $instanceList)
+                    #set($cola=false)
+                    #set($colb=false)
+                    #set($colc=false)
+                    #set($cdatecrea=false)
+                    
+                    #set($cola =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_Societe/Ontologie1_estDecritPar/Ontologie1_DenominationSociale").getAddedOrAdvisedValue())
+
+                    #set($colb =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_StatutDeLaDUE").getAddedOrAdvisedValue())
+
+                    #set($colc =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_Societe/Ontologie1_estDecritPar/Ontologie1_CCN/Ontologie1_estDecritPar/Ontologie1_TitreCCN0").getAddedOrAdvisedValue())
+
+                    <!-- $params.get("CalendarCrea").setTimeInMillis($instance.getDateCreated()) -->
+                    #set($cdatecrea =
+                    $params.get("DateFormat").format($params.get("CalendarCrea").getTime()))
+
+                    <tr>
+                        <td>
+                            #if($cola) $cola.getValue() #else vide #end
+                        </td>
+                        <td>
+                            #if($colb) $colb.getValue() #else vide #end
+                        </td>
+                        <td>
+                            #if($colc) $colc.getValue() #else vide #end
+                        </td>
+                        <td>$cdatecrea par $instance.getCreatedBy()</td>
+                        <td><div class="iconplay"><a href="etude/load?entity_id=$instance.id" target="_top" title="Ouvrir">&nbsp;</a></div>
+                            <div class="iconremove"><a href="etude/remove?entity_id=$instance.id" target="_top" title="Supprimer">&nbsp;</a></div>
+                        </td>
+                    </tr>
+                    #end
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="5">
+                            <span> total ${totalElements} page ${currentPage} / ${totalPages}</span>
+                            <a class="button tiny" href="etude/list?page=0&size=${page_size}" target="_top">debut</a>
+                            <a class="button tiny" href="etude/list?page=${prevPage}&size=${page_size}" target="_top">prec</a>
+                            <a class="button tiny" href="etude/list?page=${nextPage}&size=${page_size}" target="_top">suiv</a>
+                            <a class="button tiny" href="etude/list?page=${totalPages}&size=${page_size}" target="_top">fin</a>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+    </div>
+    <footer>
+            <hr>
+            <div class="row">
+                <div class="large-6 columns">
+                    <p>&copy; Khresterion 2015-2016.</p>
+                </div>
+                <div class="large-6 columns">
+                    <ul class="inline-list right">
+                        <li>
+                            <a href="#">.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+</div>
+
+<!--[if lt IE 9]>
+<script src="static/js/jquery/1.11.1/jquery.min.35da7198.js"></script>
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<script src="static/js/jquery/jquery.min.29a73cfd.js"></script>
+<!--<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="static/js/polyfill/rem.min.0870cc19.js"></script>
+<![endif]-->
+
+</body>
+</html>

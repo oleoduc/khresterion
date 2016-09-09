@@ -1,0 +1,1 @@
+ALTER TABLE CoherenceObjectEntity MODIFY COLUMN value longtext;

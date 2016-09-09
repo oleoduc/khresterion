@@ -1,0 +1,193 @@
+/**
+ * Created by Khresterion on 3/10/15.
+ * browser hack and customizations
+ */
+@import "compass/css3/opacity";
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input {
+  font-size: $base-font-size;
+}
+
+input.dateinput {
+  width: 5rem !important;
+}
+
+.submithide {
+  background-color: transparent;
+  border: none;
+  position:absolute; left: -100px; width: 1px; height: 1px
+}
+
+.ui-show {
+  display: block;
+  @include opacity(1);
+}
+
+.ui-hide {
+  display:none;
+  @include opacity(0);
+}
+
+.tooltip {
+  h5 {
+    font-size: $base-font-size;
+  }
+}
+
+div.combobase {
+  position: relative;
+}
+
+div.selectbox {
+  .caret{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    margin-left: 0;
+  }
+
+
+  div.comboinput {
+    position: relative;
+    padding-left: 0rem;padding-right: 0rem;
+
+    input.combo-small {
+      background-color: #EFF5F5;
+      width: 100px;
+      //height: 1.25rem;
+      padding: 0px 2px 0px 2px;
+      cursor: default;
+      border: none;
+    }
+    input.combo-normal {
+      background-color: #EFF5F5;
+      width: 180px;
+      //height: 1.25rem;
+      padding: 0px 2px 0px 2px;
+      cursor: default;
+      border: none;
+    }
+    input.combo-large {
+      background-color: #EFF5F5;
+      width: 580px;
+      //height: 1.25rem;
+      padding: 0px 2px 0px 2px;
+      cursor: default;
+      border: none;
+    }
+    button {
+      font-size: $base-font-size !important;
+      width: 20px;
+      //height: 1.25rem;
+      padding: 5px 5px !important;
+      border: none;
+      cursor: default;
+    }
+    div.hiddenlist {
+      display: none;
+      position: absolute;
+      z-index: 1050;
+      top: 0px;
+      left: 0px;
+    }
+    div.showlist {
+      position: absolute;
+      top: 2rem;
+      left: 0rem;
+      z-index: 1050;
+      background-color: #EFF5F5;
+      box-sizing: border-box;
+      display: block;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      border-top: none;
+      border-left: 1px solid $gray-light;
+      border-right: 1px solid $gray-light;
+      border-bottom: 1px solid $gray-light;
+
+      p {
+        padding: 2px 2px;
+        margin-bottom: 0px;
+        cursor: default;
+        font-size: rem-calc(10);
+      }
+      p:hover {
+        cursor: default;
+        background-color: $white;
+      }
+    }
+    div.showlist.combo-small {
+      width: 125px;
+      height: 150px;
+    }
+    div.showlist.combo-normal {
+      width: 205px;
+      height: 150px;
+    }
+    div.showlist.combo-large {
+      width: 605px;
+      height: 150px;
+    }
+  }
+}
+
+.coherencepanel {
+  display: inline-block;
+  width:100%;
+  div {
+    float: left;
+  }
+  .label-container {
+    width: 30%;
+    min-height: 1rem;
+    label {
+      display: inline-block;
+      vertical-align: middle;
+      min-height: 1rem;
+      padding-top: 4px;
+      text-align: left;
+      //font-size: $base-font-size;
+    }
+  }
+
+  .field-container {
+    width: 70%;
+    padding-right: 1rem;
+    span {
+      font-size: rem-calc(10);
+    }
+  }
+}
+
+.label-yesno {
+  width: 30%;
+  min-height: 1rem;
+  padding: 0px 4px;
+  label {
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 1rem;
+    padding-top: 4px;
+    text-align: left;
+    //font-size: $base-font-size;
+  }
+}
+
+.btn-yesno,.btn-yesno:hover,.btn-yesno:focus {background: #EFF5F5;color: $kbdark;}
+
+[ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak {
+  display: none;
+}

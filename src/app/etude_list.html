@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TestContrat</title>
+    <!--[if gt IE 9]><!-->
+    <base href="/due/">
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <base href="https://${server_name}/due/">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta content='initial-scale=1.0, maximum-scale=1.0, width=device-width' name='viewport'/>
+
+    <!-- build:css({.tmp,app}) static/css/due.min.css -->
+    <link rel="stylesheet" href="css/due.css" media="screen"/>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) static/js/json3/lib/json3.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) static/js/es5-shim/es5-shim.min.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+</head>
+<body>
+<noscript>" JavaScript must be enabled in order for you to use Khresterion in standard view.
+    However, it seems
+    JavaScript
+    is either disabled or not supported by your browser. To use standard view, enable JavaScript by
+    changing your
+    browser options, then <a href="#" target="_top">try again</a> "
+</noscript>
+<div id="top">
+    <nav class="top-bar">
+        <ul class="inline-list">
+
+            <li>
+                <a href="/due/" target="_top">DUE v0.5</a>
+            </li>
+            <li>
+                <a href="logout" target="_top">Deconnexion</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="sidenav">
+            <div class="homelink-group">
+                <a href="etude/list?page=0&size=50" target="_top" alt="lister les etudes">
+                    <div class="homelink">Liste DUE</div>
+                </a>
+                <a href="etude/list/section" target="_top" alt="lister les sections">
+                    <div class="homelink">Liste clauses</div>
+                </a>
+                <a href="etude/list/plan" target="_top" alt="Editer les plans">
+                    <div class="homelink">Mode plan</div>
+                </a>
+                <a href="edit/accounts" target="_top" alt="gerer les comptes utilsateurs">
+                    <div class="homelink">Comptes</div>
+                </a>
+            </div>
+        </div>
+            <div class="dbview">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Soci&eacute;te</th>
+                        <th>Statut</th>
+                        <th>CCN</th>
+                        <th>Cr&eacute;ation</th>
+                        <th><a class="button tiny" href="etude/edit" target="_top">Nouvelle DUE</a></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    #foreach($instance in $instanceList)
+                    #set($cola=false)
+                    #set($colb=false)
+                    #set($colc=false)
+                    #set($cdatecrea=false)
+                    
+                    #set($cola =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_Societe/Ontologie1_estDecritPar/Ontologie1_DenominationSociale").getAddedOrAdvisedValue())
+
+                    #set($colb =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_StatutDeLaDUE").getAddedOrAdvisedValue())
+
+                    #set($colc =
+                    $instance.findProperty("Ontologie1_estDecritPar/Ontologie1_Societe/Ontologie1_estDecritPar/Ontologie1_CCN/Ontologie1_estDecritPar/Ontologie1_TitreCCN0").getAddedOrAdvisedValue())
+
+                    <!-- $params.get("CalendarCrea").setTimeInMillis($instance.getDateCreated()) -->
+                    #set($cdatecrea =
+                    $params.get("DateFormat").format($params.get("CalendarCrea").getTime()))
+
+                    <tr>
+                        <td>
+                            #if($cola) $cola.getValue() #else vide #end
+                        </td>
+                        <td>
+                            #if($colb) $colb.getValue() #else vide #end
+                        </td>
+                        <td>
+                            #if($colc) $colc.getValue() #else vide #end
+                        </td>
+                        <td>$cdatecrea par $instance.getCreatedBy()</td>
+                        <td><div class="iconplay"><a href="etude/load?entity_id=$instance.id" target="_top" title="Ouvrir">&nbsp;</a></div>
+                            <div class="iconremove"><a href="etude/remove?entity_id=$instance.id" target="_top" title="Supprimer">&nbsp;</a></div>
+                        </td>
+                    </tr>
+                    #end
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="5">
+                            <span> total ${totalElements} page ${currentPage} / ${totalPages}</span>
+                            <a class="button tiny" href="etude/list?page=0&size=${page_size}"
+                               target="_top">debut</a>
+                            <a class="button tiny"
+                               href="etude/list?page=${prevPage}&size=${page_size}" target="_top">prec</a>
+                            <a class="button tiny"
+                               href="etude/list?page=${nextPage}&size=${page_size}" target="_top">suiv</a>
+                            <a class="button tiny"
+                               href="etude/list?page=${totalPages}&size=${page_size}" target="_top">fin</a>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+    </div>
+    <footer>
+            <hr>
+            <div class="row">
+                <div class="large-6 columns">
+                    <p>&copy; Khresterion 2015-2016.</p>
+                </div>
+                <div class="large-6 columns">
+                    <ul class="inline-list right">
+                        <li>
+                            <a href="#">.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+</div>
+
+<!-- build:js({.tmp,app}) static/js/jquery/1.11.1/jquery.min.js -->
+<!--[if lt IE 9]>
+<script src="bower_components/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) static/js/jquery/jquery.min.js -->
+<!--[if gte IE 9]><!-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app})  static/js/polyfill/rem.min.js -->
+<!--[if lt IE 9]>
+<script src="js/polyfill/rem.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+</body>
+</html>

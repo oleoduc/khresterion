@@ -1,0 +1,10 @@
+target/
+.settings/
+.svn/
+.classpath
+.directory
+src/node_modules/
+.project
+.gradle
+
+/build/

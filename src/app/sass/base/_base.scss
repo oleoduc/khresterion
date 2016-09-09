@@ -1,0 +1,71 @@
+/**
+ * Created by Khresterion on 3/2/15.
+ */
+
+//
+// Variables
+// --------------------------------------------------
+
+
+// Global values
+// --------------------------------------------------
+
+//Custom colors
+@import "foundation/settings";
+$kbdark: #333333;
+$kbnormal: #45759E;
+$kblight: #C1D7DE;
+$kblighter: #E4EBF0;
+$evalbackground: #F0F0F0;
+$redkbd: #BD002E;
+$buttonbg: #FFFFFF;
+$buttonbg-hover: #EFF5F5;
+$kbdborder: #C1D7DE;
+$kbdevalborder: #C1D7DE;
+
+/*
+primary #C1D7DE blue
+secondary #8FB59E green
+
+background1 #E4EBF0 blue light
+background2 #EDF5EB green light
+*/
+
+$gray-darker:            tint(#000, 13.5%); // #222
+$gray-dark:              tint(#000, 20%);   // #333
+$gray:                   tint(#000, 33.5%); // #555
+$gray-light:             tint(#000, 60%);   // #999
+$gray-lighter:           tint(#000, 93.5%); // #eee
+$white:                  #fff;
+$black:                  #000;
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        #fff;
+$textColor:             $gray-dark;
+
+// Links
+// -------------------------
+$linkColor:             $kbnormal;
+$linkColorHover:        shade($linkColor, 15%);
+
+// Typography
+// -------------------------
+$sansFontFamily:        Arial,Helvetica,sans-serif;
+$serifFontFamily:       Arial, serif;
+$monoFontFamily:        Consolas, Courier, monospace;
+
+//$baseFontSize:          100%;
+$baseFontFamily:        $sansFontFamily;
+//$baseLineHeight:        150%;
+$altFontFamily:         $serifFontFamily;
+$line-height-base:        1.25;
+$line-height-computed:    floor($base-font-size * $line-height-base); // ~16px
+
+$headingsFontFamily:    inherit; // empty to use BS default, $baseFontFamily
+$headingsFontWeight:    normal;    // instead of browser default, bold
+$headingsColor:         $gray-dark; // empty to use BS default, $textColor
+
+$experimental-support-for-svg: true;
+
+$listPadding: 5px;

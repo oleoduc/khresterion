@@ -1,0 +1,35 @@
+/**
+ * Created by Khresterion on 3/6/15.
+ * style for progresbar.js
+ */
+@import "../base/base";
+
+div.progresslayer {
+  background-color: $kblight;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+div.barlayer {
+  background-color: $kbnormal;
+  border: 1px solid $kbdborder;
+  position: absolute;
+  z-index: 1100;
+  width: 50%;
+  top: 60%;
+  left: 25%;
+  padding: 5px 5px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: $base-font-size;
+  >div {
+    margin: 2px 8px;
+    color: $gray;
+    font-size: $base-font-size;
+  }
+}
